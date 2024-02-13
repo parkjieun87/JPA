@@ -14,7 +14,7 @@ import lombok.Data;
 @Data
 @Table(name="order_item")
 @Entity
-public class OrderItems {
+public class OrderItem {
 	
 	@Id@GeneratedValue
 	@Column(name="order_item_id")

@@ -1,4 +1,5 @@
 package jpaproject.jpashop.model;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -8,11 +9,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Getter @Setter
+@Getter
 public class Delivery {
+	
 	@Id @GeneratedValue
 	@Column(name="delivery_id")
 	private Long id;

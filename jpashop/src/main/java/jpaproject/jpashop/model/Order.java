@@ -16,14 +16,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
 
 @Entity
-@Table(name = "orders")
-@Data
+@Table(name="orders")
+@Getter
 public class Order {
 	
-	@Id@GeneratedValue
+	@Id @GeneratedValue
 	@Column(name="order_id")
 	private Long id;
 	
@@ -31,20 +31,17 @@ public class Order {
 	@JoinColumn(name="member_id")
 	private Member member;
 	
-	@OneToMany(mappedBy = "order")
-	private List<OrderItems> orderItems = new ArrayList<>();
-	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="delivery_id")
 	private Delivery delivery;
 	
-	private LocalDate orderdate;
+	@OneToMany(mappedBy = "order")
+	private List<OrderItem> orderItems = new ArrayList<>();
+	
+	private LocalDate orderDate;
 	
 	@Enumerated(EnumType.STRING)
-	private OrderStatus status;
-	
-	
-	
+	private OrderStatus status;	
 	
 	
 }

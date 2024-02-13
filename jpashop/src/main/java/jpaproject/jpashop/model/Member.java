@@ -9,19 +9,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
+import lombok.Getter;
 
 @Entity
-@Data
+@Getter
 public class Member {
+	
 	@Id @GeneratedValue
-	@Column(name = "member_id")
+	@Column(name="member_id")
 	private Long id;
+	
 	private String name;
 	
 	@Embedded
 	private Address address;
+	
 	@OneToMany(mappedBy = "member")
-	private List<Order>orders = new ArrayList<>();
+	private List<Order> orders = new ArrayList<>();
 	
 }
