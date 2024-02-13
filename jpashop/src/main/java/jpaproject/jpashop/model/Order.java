@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -31,11 +32,11 @@ public class Order {
 	@JoinColumn(name="member_id")
 	private Member member;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="delivery_id")
 	private Delivery delivery;
 	
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order" , cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems = new ArrayList<>();
 	
 	private LocalDate orderDate;
