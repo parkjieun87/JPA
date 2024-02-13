@@ -26,7 +26,7 @@ class MemberRepoTest {
 	public void testMember()throws Exception {
 		//given
 		Member member = new Member();
-		member.setUsername("jieun");
+		member.setName("jieun");
 		
 		//when
 		Long save = memberRepo.save(member);
@@ -34,7 +34,7 @@ class MemberRepoTest {
 		
 		//then
 		assertThat(findId.getId()).isEqualTo(member.getId());
-		assertThat(findId.getUsername()).isEqualTo(member.getUsername());
+		assertThat(findId.getName()).isEqualTo(member.getName());
 	}
 	
 
