@@ -1,6 +1,7 @@
 package jpaproject.jpashop.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +19,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="orders")
 @Getter
+@Setter
 public class Order {
 	
 	@Id @GeneratedValue
@@ -61,5 +64,36 @@ public class Order {
 		delivery.setOrder(this);
 	}
 	
+	//생성 메서드
+		public static Order createOrder(Member member, Delivery delivery, OrderItem...orderItems) {
+			Order order = new Order();
+			order.setMemeber(member);
+			order.setDelivery(delivery);
+			for(OrderItem orderItem : orderItems) {
+				order.addOrderItem(orderItem);
+			}
+			order.setStatus(OrderStatus.ORDER);
+			order.setOrderDate(LocalDateTime.now().toLocalDate());
+			return order;
+		}
 	
+	//주문 취소
+		public void cancle() {
+			if(delivery.getStatus()== DeliveryStatus.COMP) {
+				throw new IllegalStateException("이미 배송완료되서 취소가 불가능합니다.");
+			}
+			this.setStatus(OrderStatus.CANCEL);
+			for(OrderItem orderItem : orderItems) {
+				orderItem.cancle();
+			}
+		}
+		
+		//조회 로직
+		public int getTotalPrice() {
+			int totalPirce = 0;
+			for(OrderItem orderItem : orderItems) {
+				totalPirce += orderItem.getTotalPrice();
+			}
+			return totalPirce;
+		}
 }

@@ -29,4 +29,6 @@ public class ItemService {
 	public Item findOne(Long id) {
 		return itemRepo.findOne(id);
 	}
+	
+	
 }
