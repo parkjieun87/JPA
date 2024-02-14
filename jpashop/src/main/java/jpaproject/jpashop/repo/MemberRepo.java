@@ -7,12 +7,13 @@ import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jpaproject.jpashop.model.Member;
+import lombok.RequiredArgsConstructor;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepo {
 	
-	@PersistenceContext
-	private EntityManager em;
+	private final EntityManager em;
 
 	//저장
 	public void save(Member member) {
