@@ -2,8 +2,9 @@ package jpaproject.jpashop;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +26,7 @@ class MemberServiceTest {
 	@Autowired EntityManager em;
 
 	@Test
-	public void 회원가입()throws Exception {
+	public void test()throws Exception {
 		//given
 		Member member = new Member();
 		member.setName("jieun");
@@ -37,8 +38,8 @@ class MemberServiceTest {
 		assertEquals(member, memberRepo.findOne(saveId));
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void 중복검사()throws Exception {
+	@Test()
+	public void test2()throws Exception {
 		//given
 		Member member1 = new Member();
 		member1.setName("kim");
@@ -46,12 +47,9 @@ class MemberServiceTest {
 		Member member2 = new Member();
 		member2.setName("kim");
     		
-		//when
-		memberService.join(member1);
-		memberService.join(member2);
-		
-		//then
-		fail("예외가 발생해야 한다.");
+		 //When & Then
+	    memberService.join(member1);
+	    assertThrows(IllegalStateException.class, () -> memberService.join(member2));
 		
 	}
 }
