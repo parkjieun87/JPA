@@ -1,14 +1,11 @@
 package jpaproject.jpashop;
 
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManager;
@@ -16,7 +13,6 @@ import jpaproject.jpashop.model.Member;
 import jpaproject.jpashop.repo.MemberRepo;
 import jpaproject.jpashop.service.MemberService;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
 class MemberServiceTest {
