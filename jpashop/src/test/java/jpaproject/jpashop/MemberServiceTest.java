@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.persistence.EntityManager;
 import jpaproject.jpashop.model.Member;
 import jpaproject.jpashop.repo.MemberRepo;
 import jpaproject.jpashop.service.MemberService;
@@ -19,10 +18,9 @@ class MemberServiceTest {
 	
 	@Autowired MemberService memberService;
 	@Autowired MemberRepo memberRepo;
-	@Autowired EntityManager em;
 
 	@Test
-	public void test()throws Exception {
+	public void 회원가입()throws Exception {
 		//given
 		Member member = new Member();
 		member.setName("jieun");
@@ -35,7 +33,7 @@ class MemberServiceTest {
 	}
 	
 	@Test()
-	public void test2()throws Exception {
+	public void 중복_회원_예외()throws Exception {
 		//given
 		Member member1 = new Member();
 		member1.setName("kim");
@@ -48,4 +46,5 @@ class MemberServiceTest {
 	    assertThrows(IllegalStateException.class, () -> memberService.join(member2));
 		
 	}
+	
 }
